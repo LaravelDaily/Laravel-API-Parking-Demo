@@ -19,5 +19,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('profile', [Auth\ProfileController::class, 'show']);
+    Route::put('profile', [Auth\ProfileController::class, 'update']);
+});
+
 Route::post('auth/register', Auth\RegisterController::class);
 Route::post('auth/login', Auth\LoginController::class);
