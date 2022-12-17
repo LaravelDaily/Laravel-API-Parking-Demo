@@ -8,7 +8,9 @@ class ParkingObserver
 {
     public function creating(Parking $parking)
     {
-        $parking->user_id = auth()->id() ?? NULL;
+        if (auth()->check()) {
+            $parking->user_id = auth()->id();
+        }
         $parking->start_time = now();
     }
 }
