@@ -14,11 +14,12 @@ class ZoneTest extends TestCase
         $response = $this->getJson('/api/v1/zones');
 
         $response->assertStatus(200)
-            ->assertJsonCount(3)
-            ->assertJsonStructure([
+            ->assertJsonStructure(['data'])
+            ->assertJsonCount(3, 'data')
+            ->assertJsonStructure(['data' => [
                 ['*' => 'name', 'price_per_hour'],
-            ])
-            ->assertJsonPath('0.name', 'Green Zone')
-            ->assertJsonPath('0.price_per_hour', 100);
+            ]])
+            ->assertJsonPath('data.0.name', 'Green Zone')
+            ->assertJsonPath('data.0.price_per_hour', 100);
     }
 }
