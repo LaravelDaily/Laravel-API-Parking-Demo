@@ -14,7 +14,7 @@ class Parking extends Model
 
     protected $casts = [
         'start_time' => 'datetime',
-        'stop_time' => 'datetime',
+        'stop_time'  => 'datetime',
     ];
 
     public function zone()
@@ -33,5 +33,4 @@ class Parking extends Model
             $builder->where('user_id', auth()->id());
         });
     }
-
 }

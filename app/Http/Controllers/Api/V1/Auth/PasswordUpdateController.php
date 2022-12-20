@@ -15,7 +15,7 @@ class PasswordUpdateController extends Controller
     public function __invoke(Request $request)
     {
         $request->validate([
-            'password' => ['required', 'confirmed', Password::defaults()]
+            'password' => ['required', 'confirmed', Password::defaults()],
         ]);
 
         auth()->user()->update([

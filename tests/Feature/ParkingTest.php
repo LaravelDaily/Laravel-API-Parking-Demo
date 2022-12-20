@@ -15,9 +15,9 @@ class ParkingTest extends TestCase
 
     public function testUserCanStartParking()
     {
-        $user = User::factory()->create();
+        $user    = User::factory()->create();
         $vehicle = Vehicle::factory()->create(['user_id' => $user->id]);
-        $zone = Zone::first();
+        $zone    = Zone::first();
 
         $response = $this->actingAs($user)->postJson('/api/v1/parkings/start', [
             'vehicle_id' => $vehicle->id,
@@ -39,9 +39,9 @@ class ParkingTest extends TestCase
 
     public function testUserCanGetOngoingParkingWithCorrectPrice()
     {
-        $user = User::factory()->create();
+        $user    = User::factory()->create();
         $vehicle = Vehicle::factory()->create(['user_id' => $user->id]);
-        $zone = Zone::first();
+        $zone    = Zone::first();
 
         $this->actingAs($user)->postJson('/api/v1/parkings/start', [
             'vehicle_id' => $vehicle->id,
@@ -50,8 +50,8 @@ class ParkingTest extends TestCase
 
         $this->travel(2)->hours();
 
-        $parking = Parking::first();
-        $response = $this->actingAs($user)->getJson('/api/v1/parkings/' . $parking->id);
+        $parking  = Parking::first();
+        $response = $this->actingAs($user)->getJson('/api/v1/parkings/'.$parking->id);
 
         $response->assertStatus(200)
             ->assertJsonStructure(['data'])
@@ -65,9 +65,9 @@ class ParkingTest extends TestCase
 
     public function testUserCanStopParking()
     {
-        $user = User::factory()->create();
+        $user    = User::factory()->create();
         $vehicle = Vehicle::factory()->create(['user_id' => $user->id]);
-        $zone = Zone::first();
+        $zone    = Zone::first();
 
         $this->actingAs($user)->postJson('/api/v1/parkings/start', [
             'vehicle_id' => $vehicle->id,
@@ -76,8 +76,8 @@ class ParkingTest extends TestCase
 
         $this->travel(2)->hours();
 
-        $parking = Parking::first();
-        $response = $this->actingAs($user)->putJson('/api/v1/parkings/' . $parking->id);
+        $parking  = Parking::first();
+        $response = $this->actingAs($user)->putJson('/api/v1/parkings/'.$parking->id);
 
         $updatedParking = Parking::find($parking->id);
 

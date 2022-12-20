@@ -5,12 +5,12 @@ namespace App\Services;
 use App\Models\Zone;
 use Carbon\Carbon;
 
-class ParkingPriceService {
-
+class ParkingPriceService
+{
     public static function calculatePrice(int $zone_id, string $startTime, string $stopTime = null): int
     {
         $start = new Carbon($startTime);
-        $stop = (!is_null($stopTime)) ? new Carbon($stopTime) : now();
+        $stop  = (! is_null($stopTime)) ? new Carbon($stopTime) : now();
 
         $totalTimeByMinutes = $stop->diffInMinutes($start);
 
@@ -18,5 +18,4 @@ class ParkingPriceService {
 
         return ceil($totalTimeByMinutes * $priceByMinutes);
     }
-
 }

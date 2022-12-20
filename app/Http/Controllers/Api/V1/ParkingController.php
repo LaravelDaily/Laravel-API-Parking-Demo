@@ -17,7 +17,7 @@ class ParkingController extends Controller
     {
         $parkingData = $request->validate([
             'vehicle_id' => ['required', 'integer', 'exists:vehicles,id'],
-            'zone_id' => ['required', 'integer', 'exists:zones,id'],
+            'zone_id'    => ['required', 'integer', 'exists:zones,id'],
         ]);
 
         $parking = Parking::create($parkingData);
@@ -34,7 +34,7 @@ class ParkingController extends Controller
     public function stop(Parking $parking)
     {
         $parking->update([
-            'stop_time' => now(),
+            'stop_time'   => now(),
             'total_price' => ParkingPriceService::calculatePrice($parking->zone_id, $parking->start_time),
         ]);
 

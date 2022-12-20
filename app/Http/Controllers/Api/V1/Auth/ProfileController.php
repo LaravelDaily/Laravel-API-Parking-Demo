@@ -14,7 +14,7 @@ class ProfileController extends Controller
     public function show()
     {
         return response()->json([
-            'name' => auth()->user()->name,
+            'name'  => auth()->user()->name,
             'email' => auth()->user()->email,
         ]);
     }
@@ -22,8 +22,8 @@ class ProfileController extends Controller
     public function update(Request $request)
     {
         $validatedData = $request->validate([
-            'name' => ['required', 'string'],
-            'email' => ['required', 'email', Rule::unique('users')->ignore(auth()->user())]
+            'name'  => ['required', 'string'],
+            'email' => ['required', 'email', Rule::unique('users')->ignore(auth()->user())],
         ]);
 
         auth()->user()->update($validatedData);
