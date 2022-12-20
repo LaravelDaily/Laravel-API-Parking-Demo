@@ -1,14 +1,12 @@
-name: Auth
-description: |-
-
-  Register
+name: Vehicles
+description: ''
 endpoints:
   -
     httpMethods:
       - GET
-    uri: api/v1/profile
+    uri: api/v1/vehicles
     metadata:
-      groupName: Auth
+      groupName: Vehicles
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
@@ -35,10 +33,10 @@ endpoints:
     custom: []
   -
     httpMethods:
-      - PUT
-    uri: api/v1/profile
+      - POST
+    uri: api/v1/vehicles
     metadata:
-      groupName: Auth
+      groupName: Vehicles
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
@@ -54,23 +52,53 @@ endpoints:
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      name:
-        name: name
+      plate_number:
+        name: plate_number
         description: ''
         required: true
-        example: omnis
-        type: string
-        custom: []
-      email:
-        name: email
-        description: 'Must be a valid email address.'
-        required: true
-        example: zoie.bogisich@example.org
+        example: soluta
         type: string
         custom: []
     cleanBodyParameters:
-      name: omnis
-      email: zoie.bogisich@example.org
+      plate_number: soluta
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/v1/vehicles/{id}'
+    metadata:
+      groupName: Vehicles
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the vehicle.'
+        required: true
+        example: 7
+        type: integer
+        custom: []
+    cleanUrlParameters:
+      id: 7
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
     fileParameters: []
     responses: []
     responseFields: []
@@ -82,9 +110,10 @@ endpoints:
   -
     httpMethods:
       - PUT
-    uri: api/v1/password
+      - PATCH
+    uri: 'api/v1/vehicles/{id}'
     metadata:
-      groupName: Auth
+      groupName: Vehicles
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
@@ -95,20 +124,28 @@ endpoints:
     headers:
       Content-Type: application/json
       Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the vehicle.'
+        required: true
+        example: 5
+        type: integer
+        custom: []
+    cleanUrlParameters:
+      id: 5
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      password:
-        name: password
+      plate_number:
+        name: plate_number
         description: ''
         required: true
-        example: ab
+        example: nihil
         type: string
         custom: []
     cleanBodyParameters:
-      password: ab
+      plate_number: nihil
     fileParameters: []
     responses: []
     responseFields: []
@@ -119,13 +156,11 @@ endpoints:
     custom: []
   -
     httpMethods:
-      - POST
-    uri: api/v1/auth/register
+      - DELETE
+    uri: 'api/v1/vehicles/{id}'
     metadata:
-      groupName: Auth
-      groupDescription: |-
-
-        Register
+      groupName: Vehicles
+      groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
       title: ''
@@ -135,84 +170,20 @@ endpoints:
     headers:
       Content-Type: application/json
       Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the vehicle.'
+        required: true
+        example: 19
+        type: integer
+        custom: []
+    cleanUrlParameters:
+      id: 19
     queryParameters: []
     cleanQueryParameters: []
-    bodyParameters:
-      name:
-        name: name
-        description: 'Must not be greater than 255 characters.'
-        required: true
-        example: erewevayp
-        type: string
-        custom: []
-      email:
-        name: email
-        description: 'Must be a valid email address. Must not be greater than 255 characters.'
-        required: true
-        example: dschroeder@example.net
-        type: string
-        custom: []
-      password:
-        name: password
-        description: ''
-        required: true
-        example: enim
-        type: string
-        custom: []
-    cleanBodyParameters:
-      name: erewevayp
-      email: dschroeder@example.net
-      password: enim
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/v1/auth/login
-    metadata:
-      groupName: Auth
-      groupDescription: |-
-
-        Login
-      subgroup: ''
-      subgroupDescription: ''
-      title: ''
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      email:
-        name: email
-        description: 'Must be a valid email address.'
-        required: true
-        example: wiza.micaela@example.com
-        type: string
-        custom: []
-      password:
-        name: password
-        description: ''
-        required: true
-        example: architecto
-        type: string
-        custom: []
-    cleanBodyParameters:
-      email: wiza.micaela@example.com
-      password: architecto
+    bodyParameters: []
+    cleanBodyParameters: []
     fileParameters: []
     responses: []
     responseFields: []

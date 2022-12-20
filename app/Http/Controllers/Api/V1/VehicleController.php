@@ -7,6 +7,9 @@ use App\Http\Requests\StoreVehicleRequest;
 use App\Http\Resources\VehicleResource;
 use App\Models\Vehicle;
 
+/**
+ * @group Vehicles
+ */
 class VehicleController extends Controller
 {
     public function index()

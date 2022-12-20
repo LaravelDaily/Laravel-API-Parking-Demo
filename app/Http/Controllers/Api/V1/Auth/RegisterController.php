@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 
+/**
+ * @group Auth
+ *
+ * Register
+ */
 class RegisterController extends Controller
 {
     public function __invoke(Request $request)

@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
+/**
+ * @group Auth
+ *
+ * Login
+ */
 class LoginController extends Controller
 {
     public function __invoke(Request $request)
