@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreVehicleRequest;
 use App\Http\Resources\VehicleResource;
 use App\Models\Vehicle;
+use Illuminate\Http\Response;
 
 /**
  * @group Vehicles
@@ -33,7 +34,7 @@ class VehicleController extends Controller
     {
         $vehicle->update($request->validated());
 
-        return VehicleResource::make($vehicle);
+        return response()->json(VehicleResource::make($vehicle), Response::HTTP_ACCEPTED);
     }
 
     public function destroy(Vehicle $vehicle)

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Validation\Rule;
 
 /**
@@ -11,12 +12,9 @@ use Illuminate\Validation\Rule;
  */
 class ProfileController extends Controller
 {
-    public function show()
+    public function show(Request $request)
     {
-        return response()->json([
-            'name'  => auth()->user()->name,
-            'email' => auth()->user()->email,
-        ]);
+        return response()->json($request->user()->only('name', 'email'));
     }
 
     public function update(Request $request)
@@ -28,6 +26,6 @@ class ProfileController extends Controller
 
         auth()->user()->update($validatedData);
 
-        return response()->json($validatedData);
+        return response()->json($validatedData, Response::HTTP_ACCEPTED);
     }
 }

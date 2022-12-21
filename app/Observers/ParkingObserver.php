@@ -11,6 +11,7 @@ class ParkingObserver
         if (auth()->check()) {
             $parking->user_id = auth()->id();
         }
+
         $parking->start_time = now();
     }
 }
