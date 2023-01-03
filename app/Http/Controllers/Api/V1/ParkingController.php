@@ -41,7 +41,7 @@ class ParkingController extends Controller
 
         if (Parking::active()->where('vehicle_id', $request->vehicle_id)->exists()) {
             return response()->json([
-                'message' => 'Can\'t start parking twice using same vehicle. Please stop currently active parking.',
+                'errors' => ['general' => ['Can\'t start parking twice using same vehicle. Please stop currently active parking.']],
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
