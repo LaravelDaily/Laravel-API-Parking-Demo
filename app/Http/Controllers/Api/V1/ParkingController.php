@@ -56,6 +56,8 @@ class ParkingController extends Controller
 
     public function show(Parking $parking)
     {
+        $parking->load(['vehicle' => fn ($q) => $q->withTrashed()]);
+
         return ParkingResource::make($parking);
     }
 
