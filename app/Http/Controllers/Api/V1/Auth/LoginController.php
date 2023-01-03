@@ -31,10 +31,11 @@ class LoginController extends Controller
             ]);
         }
 
-        $device = substr($request->userAgent() ?? '', 0, 255);
+        $device    = substr($request->userAgent() ?? '', 0, 255);
+        $expiresAt = $request->remember ? null : now()->addMinutes(config('session.lifetime'));
 
         return response()->json([
-            'access_token' => $user->createToken($device)->plainTextToken,
+            'access_token' => $user->createToken($device, expiresAt: $expiresAt)->plainTextToken,
         ], Response::HTTP_CREATED);
     }
 }
