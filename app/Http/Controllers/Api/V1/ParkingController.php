@@ -23,7 +23,10 @@ class ParkingController extends Controller
 
     public function history()
     {
-        $stoppedParkings = Parking::stopped()->latest('stop_time')->get();
+        $stoppedParkings = Parking::stopped()
+            ->with(['vehicle' => fn ($q) => $q->withTrashed()])
+            ->latest('stop_time')
+            ->get();
 
         return ParkingResource::collection($stoppedParkings);
     }
