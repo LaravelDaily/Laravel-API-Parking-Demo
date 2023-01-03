@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\V1\Auth;
+use App\Http\Controllers\Api\V1\Auth\LogoutController;
 use App\Http\Controllers\Api\V1\ParkingController;
 use App\Http\Controllers\Api\V1\VehicleController;
 use App\Http\Controllers\Api\V1\ZoneController;
@@ -35,9 +36,10 @@ Route::middleware('auth:sanctum')->group(function () {
         return Parking::where('id', $id)->active()->firstOrFail();
     });
     Route::put('parkings/{activeParking}', [ParkingController::class, 'stop']);
+
+    Route::post('auth/logout', Auth\LogoutController::class);
 });
 
 Route::post('auth/register', Auth\RegisterController::class);
 Route::post('auth/login', Auth\LoginController::class);
-
 Route::get('zones', [ZoneController::class, 'index']);
