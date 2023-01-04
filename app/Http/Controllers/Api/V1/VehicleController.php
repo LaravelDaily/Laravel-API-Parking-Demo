@@ -32,12 +32,6 @@ class VehicleController extends Controller
 
     public function update(StoreVehicleRequest $request, Vehicle $vehicle)
     {
-        if ($vehicle->hasActiveParkings()) {
-            return response()->json([
-                'errors' => ['general' => ['Can\'t update vehicle with active parkings. Stop active parking.']],
-            ], Response::HTTP_UNPROCESSABLE_ENTITY);
-        }
-
         $vehicle->update($request->validated());
 
         return response()->json(VehicleResource::make($vehicle), Response::HTTP_ACCEPTED);
