@@ -31,7 +31,7 @@ class ProfileTest extends TestCase
             'email' => 'john_updated@example.com',
         ]);
 
-        $response->assertStatus(200)
+        $response->assertStatus(202)
             ->assertJsonStructure(['name', 'email'])
             ->assertJsonCount(2)
             ->assertJsonFragment(['name' => 'John Updated']);
@@ -47,10 +47,11 @@ class ProfileTest extends TestCase
         $user = User::factory()->create();
 
         $response = $this->actingAs($user)->putJson('/api/v1/password', [
+            'current_password'      => 'password',
             'password'              => 'testing123',
             'password_confirmation' => 'testing123',
         ]);
 
-        $response->assertNoContent();
+        $response->assertStatus(202);
     }
 }

@@ -17,8 +17,9 @@ class ZoneTest extends TestCase
             ->assertJsonStructure(['data'])
             ->assertJsonCount(3, 'data')
             ->assertJsonStructure(['data' => [
-                ['*' => 'name', 'price_per_hour'],
+                ['*' => 'id', 'name', 'price_per_hour'],
             ]])
+            ->assertJsonPath('data.0.id', 1)
             ->assertJsonPath('data.0.name', 'Green Zone')
             ->assertJsonPath('data.0.price_per_hour', 100);
     }

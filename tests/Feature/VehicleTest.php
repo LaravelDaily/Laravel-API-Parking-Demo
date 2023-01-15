@@ -42,7 +42,7 @@ class VehicleTest extends TestCase
 
         $response->assertStatus(201)
             ->assertJsonStructure(['data'])
-            ->assertJsonCount(2, 'data')
+            ->assertJsonCount(3, 'data')
             ->assertJsonStructure([
                 'data' => ['0' => 'plate_number'],
             ])
@@ -62,13 +62,9 @@ class VehicleTest extends TestCase
             'plate_number' => 'AAA123',
         ]);
 
-        $response->assertOk()
-            ->assertJsonStructure(['data'])
-            ->assertJsonCount(2, 'data')
-            ->assertJsonStructure([
-                'data' => ['0' => 'plate_number'],
-            ])
-            ->assertJsonPath('data.plate_number', 'AAA123');
+        $response->assertStatus(202)
+            ->assertJsonStructure(['plate_number'])
+            ->assertJsonPath('plate_number', 'AAA123');
 
         $this->assertDatabaseHas('vehicles', [
             'plate_number' => 'AAA123',
@@ -84,7 +80,9 @@ class VehicleTest extends TestCase
 
         $response->assertNoContent();
 
-        $this->assertModelMissing($vehicle)
-            ->assertDatabaseCount('vehicles', 0);
+        $this->assertDatabaseMissing('vehicles', [
+            'id' => $vehicle->id,
+            'deleted_at' => NULL
+        ])->assertDatabaseCount('vehicles', 1);
     }
 }

@@ -19,7 +19,7 @@ class AuthenticationTest extends TestCase
             'password' => 'password',
         ]);
 
-        $response->assertStatus(200);
+        $response->assertStatus(201);
     }
 
     public function testUserCannotLoginWithIncorrectCredentials()
@@ -43,9 +43,9 @@ class AuthenticationTest extends TestCase
             'password_confirmation' => 'password',
         ]);
 
-        $response->assertStatus(200)
+        $response->assertStatus(201)
             ->assertJsonStructure([
-                'token',
+                'access_token',
             ]);
 
         $this->assertDatabaseHas('users', [
